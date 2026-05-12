@@ -373,45 +373,6 @@ Arquivo: `.github/workflows/e2e.yml`
 
 ---
 
-## Troubleshooting
-
-### `session not created: ChromeDriver only supports Chrome version X`
-
-O Selenium Manager priorizou um `chromedriver.exe` antigo que está no PATH do sistema, em vez de baixar a versão compatível.
-
-**Fix temporário (sem alterar o ambiente):**
-
-```powershell
-# PowerShell — remove a entrada antiga apenas nesta sessão
-$env:Path = ($env:Path -split ';' | Where-Object { $_ -notlike '*chromedriver*' }) -join ';'
-mvn test -Dheadless=true
-```
-
-### `JAVA_HOME` não configurado
-
-```
-The JAVA_HOME environment variable is not defined correctly
-```
-
-Configure a variável apontando para o diretório raiz do JDK (não o `bin`):
-
-```bash
-# Linux / macOS
-export JAVA_HOME=/path/to/jdk-21
-
-# Windows (PowerShell)
-$env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
-```
-
-### Warnings inofensivos durante a execução
-
-| Warning | Causa | Impacto |
-|---|---|---|
-| `Unable to find CDP implementation matching 148` | Selenium 4.33 não tem o Chrome DevTools Protocol da versão 148 empacotado | Nenhum — CDP não é usado neste projeto |
-| `sun.misc.Unsafe::objectFieldOffset called by AspectJ` | AspectJ 1.9.24 usa API deprecada no Java 24 | Nenhum — será resolvido em versão futura do AspectJ |
-
----
-
 ## Roadmap
 
 - [ ] Publicar Allure Report automaticamente no GitHub Pages via Actions
