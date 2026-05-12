@@ -29,9 +29,13 @@ jobs:
       - name: Run tests
         run: mvn -B -ntp test -Dheadless=true
 
+      - name: Install Allure CLI
+        if: always()
+        run: npm install -g allure-commandline
+
       - name: Generate Allure report
         if: always()
-        run: mvn -B -ntp allure:report
+        run: allure generate target/allure-results -o target/allure-report --clean
 
       - name: Upload Allure results
         if: always()
@@ -46,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: target/site/allure-maven-plugin
+          path: target/allure-report
           retention-days: 14
 
       - name: Upload Surefire reports on failure
