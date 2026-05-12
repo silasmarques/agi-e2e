@@ -349,14 +349,14 @@ assertThat(site.urlContemUtmDoBlog()).isTrue();
 
 O Allure Report exibe cada cenário com seus passos, tempo de execução e evidências em caso de falha.
 
+🔗 **Relatório online (atualizado a cada execução):** [silasmarques.github.io/agi-e2e](https://silasmarques.github.io/agi-e2e/)
+
 Para visualizar localmente após executar os testes:
 
 ```bash
 mvn test -Dheadless=true   # executa os testes
 mvn allure:serve            # abre o relatório no browser
 ```
-
-> Quando o repositório estiver configurado no GitHub, o relatório é gerado automaticamente pelo **GitHub Actions** e disponibilizado como artifact em cada execução (aba **Actions → workflow run → Artifacts → allure-report**).
 
 ---
 
@@ -373,10 +373,3 @@ Arquivo: `.github/workflows/e2e.yml`
 - Relatório Allure gerado e publicado como artifact (retido por 14 dias).
 - **Não dispara em pull requests** — o site testado é de terceiro (Agibank), não há código nosso pra validar em PR.
 
----
-
-## Roadmap
-
-- [ ] Adicionar retry nos GETs externos (App Store / Google Play) para tolerância a instabilidade de rede
-- [ ] Suporte a Firefox e Edge
-- [ ] Testes para a página de categorias e navegação interna do blog
