@@ -7,6 +7,8 @@
 ![Selenium](https://img.shields.io/badge/Selenium-4.33-green?logo=selenium)
 ![Tests](https://img.shields.io/badge/testes-17%20passing-brightgreen)
 
+📊 **[Ver Allure Report](https://silasmarques.github.io/agi-e2e/)**
+
 ---
 
 ## Sobre o projeto
@@ -375,7 +377,6 @@ Arquivo: `.github/workflows/e2e.yml`
 
 ## Roadmap
 
-- [ ] Publicar Allure Report automaticamente no GitHub Pages via Actions
 - [ ] Adicionar retry nos GETs externos (App Store / Google Play) para tolerância a instabilidade de rede
 - [ ] Suporte a Firefox e Edge
 - [ ] Testes para a página de categorias e navegação interna do blog
