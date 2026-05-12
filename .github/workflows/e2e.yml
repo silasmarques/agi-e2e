@@ -1,0 +1,58 @@
+name: E2E Blog do Agibank
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * *'  # 08:00 BRT (UTC-3) diário
+
+jobs:
+  e2e:
+    name: Run E2E tests (headless Chrome)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run tests
+        run: mvn -B -ntp test -Dheadless=true
+
+      - name: Generate Allure report
+        if: always()
+        run: mvn -B -ntp allure:report
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
+          retention-days: 14
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin
+          retention-days: 14
+
+      - name: Upload Surefire reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+          retention-days: 14
