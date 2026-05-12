@@ -371,6 +371,5 @@ Arquivo: `.github/workflows/e2e.yml`
 
 - Chrome stable instalado no runner Ubuntu.
 - Relatório Allure publicado automaticamente em [silasmarques.github.io/agi-e2e](https://silasmarques.github.io/agi-e2e/) após cada execução.
-- **Não dispara em pull requests** — o site testado é de terceiro (Agibank), não há código nosso pra validar em PR.
 - **Atenção:** o GitHub desativa workflows agendados automaticamente após 60 dias sem atividade no repositório. Para reativar, acesse a aba Actions e habilite o workflow manualmente.
 
